@@ -21,7 +21,8 @@ type ContactFormProps = {
 }
 
 export default function ContactForm({ initialData, onSubmit, onCancel }: ContactFormProps) {
-  const [formData, setFormData] = useState<Omit<Contact, "id">>({
+  const [formData, setFormData] = useState({
+    id: "",
     name: "",
     phone: "",
     email: "",
@@ -30,8 +31,7 @@ export default function ContactForm({ initialData, onSubmit, onCancel }: Contact
   // Cargar datos iniciales si estamos editando
   useEffect(() => {
     if (initialData) {
-      const { id, ...data } = initialData
-      setFormData(data)
+      setFormData(initialData)
     }
   }, [initialData])
 
@@ -45,7 +45,7 @@ export default function ContactForm({ initialData, onSubmit, onCancel }: Contact
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmit(initialData ? { ...formData, id: initialData.id } : formData)
+    onSubmit(formData)
   }
 
   return (

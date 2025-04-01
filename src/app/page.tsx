@@ -50,10 +50,8 @@ export default function ContactsApp() {
   }
 
   // Función para actualizar un contacto
-  const updateContact = (updatedContact: Contact | Omit<Contact, "id">) => {
-    if ('id' in updatedContact) {
-      setContacts(contacts.map((contact) => (contact.id === updatedContact.id ? updatedContact : contact)))
-    }
+  const updateContact = (updatedContact: Contact) => {
+    setContacts(contacts.map((contact) => (contact.id === updatedContact.id ? updatedContact : contact)))
     setEditingContact(null)
     setShowForm(false)
   }
